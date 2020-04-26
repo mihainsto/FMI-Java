@@ -22,6 +22,11 @@ public class CSVReader {
         file = new File(path + filename);
         br = new BufferedReader((new FileReader(path + filename))) ;
     }
+
+    public void changeFile(String filename) throws IOException{
+        file = new File(path + filename);
+        br = new BufferedReader((new FileReader(path + filename))) ;
+    }
     public List<String> readLine() throws IOException {
         String line = "";
         List<String> values = new ArrayList<>();

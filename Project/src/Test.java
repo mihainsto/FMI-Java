@@ -1,5 +1,7 @@
+import dataPersistance.Audit;
 import dataPersistance.CSVWriter;
 import game.DigitalGame;
+import game.Game;
 import game.PhysicalGame;
 import hardware.Cpu;
 import hardware.GameConsole;
@@ -33,7 +35,7 @@ public class Test {
         // Defining the hardware.Hardware that will be selling
         // Defining game consoles
         var ps4 = new GameConsole(400, "Playstation 4 Slim",
-                "Introducing the Playstation4 SLIM, 1TB hard drive, all greatest games, TV, music and more.",
+                "Introducing the Playstation4 SLIM; 1TB hard drive; all greatest games; TV; music and more.",
                 100, 0.5f, 2, "1080p");
         ps4.addFreeGame(witcher3PS4);
 
@@ -47,6 +49,7 @@ public class Test {
         //System.out.println(i99900k);
 
         User uMihai = new User("Mihai");
+        User uJon = new User("Jon");
 
         uMihai.addItemToCart(ps4);
         uMihai.addItemToCart(rtx2070Super);
@@ -55,17 +58,53 @@ public class Test {
         System.out.println(uMihai.buy());
 
 
-        CSVWriter writer = CSVWriter.getInstance("test.csv");
-        CSVReader reader = CSVReader.getInstance("test.csv");
-        //writer.writeHeader(new ArrayList<String>(Arrays.asList("Hello", "World!", "How", "Are", "You")));
-        //System.out.println(uMihai.CSVHeader());
-        //System.out.println(uMihai.CSVValues());
-        writer.write(uMihai.CSVHeader());
+        CSVWriter writer = CSVWriter.getInstance("users.csv");
+        /*writer.write(uMihai.CSVHeader());
         writer.write(uMihai.CSVValues());
+        writer.write(uJon.CSVValues());*/
+        CSVReader reader = CSVReader.getInstance("users.csv");
+        reader.readLine();
+        User perUser1 = new User(reader.readLine().get(0));
+        User perUser2 = new User(reader.readLine().get(0));
+        System.out.println(perUser1.toString());
+        System.out.println(perUser2.toString());
 
-        //System.out.println(reader.readLine());
-        //System.out.println(reader.readLine());
-        System.out.println(reader.readLine());
+        writer.changeFile("videoCards.csv");
+        /*writer.write(rtx2070Super.CSVHeader());
+        writer.write(rtx2070Super.CSVValues());*/
+        reader.changeFile("videoCards.csv");
+        reader.readLine();
+        var d = reader.readLine();
+        VideoCard perRtx2070Super = new VideoCard(Float.parseFloat(d.get(1)), d.get(2), d.get(3), Integer.parseInt(d.get(4)), Float.parseFloat(d.get(5)), Float.parseFloat(d.get(6)),
+                Integer.parseInt(d.get(7)), Integer.parseInt(d.get(8)), d.get(9));
+        System.out.println(perRtx2070Super.toString());
+
+        writer.changeFile("cpus.csv");
+        /*writer.write(i79700F.CSVHeader());
+        writer.write(i79700F.CSVValues());
+        writer.write(i99900k.CSVValues());*/
+        reader.changeFile("cpus.csv");
+        reader.readLine();
+        d = reader.readLine();
+        Cpu peri79700F = new Cpu(Float.parseFloat(d.get(1)), d.get(2), d.get(3), Integer.parseInt(d.get(4)), Float.parseFloat(d.get(5)), Integer.parseInt(d.get(6)), Float.parseFloat(d.get(7)), Integer.parseInt(d.get(8)));
+        d = reader.readLine();
+        Cpu peri99900k = new Cpu(Float.parseFloat(d.get(1)), d.get(2), d.get(3), Integer.parseInt(d.get(4)), Float.parseFloat(d.get(5)), Integer.parseInt(d.get(6)), Float.parseFloat(d.get(7)), Integer.parseInt(d.get(8)));
+
+        System.out.println(peri79700F.toString());
+
+        writer.changeFile("gameConsoles.csv");
+        /*writer.write(ps4.CSVHeader());
+        writer.write(ps4.CSVValues());*/
+
+        reader.changeFile("gameConsoles.csv");
+        reader.readLine();
+        d = reader.readLine();
+        GameConsole perPs4 =new GameConsole(Float.parseFloat(d.get(1)), d.get(2), d.get(3), Integer.parseInt(d.get(4)), Float.parseFloat(d.get(5)), Integer.parseInt(d.get(6)), d.get(7));
+        System.out.println(perPs4.toString());
+
+//        Audit a = Audit.getInstance();
+//        a.log("TEST");
+
 
 
 

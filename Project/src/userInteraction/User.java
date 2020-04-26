@@ -47,4 +47,13 @@ public class User {
 
         return values;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", id=" + id +
+                ", cart=" + cart +
+                '}';
+    }
 }

@@ -29,7 +29,16 @@ public class CSVWriter {
             single_instance = new CSVWriter(filename);
         return single_instance;
     }
-
+    public void changeFile(String filename) throws IOException {
+        file = new File(path + filename);
+        if (file.exists()){
+            writer = new FileWriter(file, true);
+        }
+        else{
+            file.createNewFile();
+            writer = new FileWriter(file, true);
+        }
+    }
     public void write(List<String> header) throws IOException {
         header.forEach((h) ->
         {
