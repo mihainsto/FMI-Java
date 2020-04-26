@@ -1,10 +1,18 @@
+package userInteraction;
+
+import products.Product;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class User {
     private static final AtomicInteger count = new AtomicInteger(0);
     private String username;
-    private ShoppingCart cart;
     private final int id;
+
+    private ShoppingCart cart;
 
     public User(String username) {
         this.username = username;
@@ -23,4 +31,20 @@ public class User {
         return this.cart.buy();
     }
 
+
+    public List<String> CSVHeader(){
+        List<String> header = new ArrayList<>();
+        header.add("username");
+        header.add("id");
+
+        return header;
+    }
+
+    public List<String> CSVValues(){
+        List<String> values = new ArrayList<>();
+        values.add(username);
+        values.add(String.valueOf(id));
+
+        return values;
+    }
 }

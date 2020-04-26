@@ -1,3 +1,7 @@
+package userInteraction;
+
+import products.Product;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,13 +21,6 @@ public class ShoppingCart {
         this.products.add(product);
     }
 
-    public float totalPrice(){
-        float price = 0;
-        for(Product product: this.products){
-            price += product.getPrice();
-        }
-        return price;
-    }
 
     public float buy(){
         float price = totalPrice();
@@ -32,8 +29,16 @@ public class ShoppingCart {
     }
     @Override
     public String toString() {
-        return "ShoppingCart{" +
+        return "userInteraction.ShoppingCart{" +
                 "products=" + products +
                 '}';
+    }
+
+    private float totalPrice(){
+        float price = 0;
+        for(Product product: this.products){
+            price += product.getPrice();
+        }
+        return price;
     }
 }

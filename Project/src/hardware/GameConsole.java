@@ -1,3 +1,8 @@
+package hardware;
+import products.Product;
+import game.Game;
+import hardware.Hardware;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +52,7 @@ public class GameConsole extends Hardware {
 
     @Override
     public String toString() {
-        return super.toString()+"\nGameConsole{" +
+        return super.toString()+"\nhardware.GameConsole{" +
                 "numberOfControllers=" + numberOfControllers +
                 ", outputResolution='" + outputResolution + '\'' +
                 ", freeGames=" + freeGames +

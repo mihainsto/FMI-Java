@@ -1,4 +1,8 @@
-public class PhysicalGame extends  Game{
+package game;
+
+import game.Game;
+
+public class PhysicalGame extends Game {
     private int numberOfDisks;
 
     public PhysicalGame(float price, String title, String description, String developer, String type, int reviewsNote, String platform, int size, int numberOfDisks) {
@@ -16,7 +20,7 @@ public class PhysicalGame extends  Game{
 
     @Override
     public String toString() {
-        return super.toString()+"\nPhysicalGame{" +
+        return super.toString()+"\ngame.PhysicalGame{" +
                 "numberOfDisks=" + numberOfDisks +
                 '}';
     }

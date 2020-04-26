@@ -1,3 +1,9 @@
+package products;
+
+import hardware.Cpu;
+import hardware.Hardware;
+
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -8,13 +14,11 @@ public abstract class Product {
     private float price;
     private String title;
     private String description;
-    private List<String> tags;
 
     public Product(float price, String title, String description) {
         this.price = price;
         this.title = title;
         this.description = description;
-        this.tags = new ArrayList<>();
         this.id = count.incrementAndGet();
     }
 
@@ -42,26 +46,40 @@ public abstract class Product {
         this.description = description;
     }
 
-    public void addTag(String tag){
-        this.tags.add(tag);
-    }
-
-    public List<String> getTags(){
-        return tags;
-    }
-
     public int getId() {
         return id;
     }
 
     @Override
     public String toString() {
-        return "Product{" +
+        return "products.Product{" +
                 "id=" + id +
                 ", price=" + price +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", tags=" + tags +
                 '}';
+    }
+
+    public List<String> CSVHeader(){
+        List<String> header = new ArrayList<>();
+
+
+        var varNames = Product.class.getDeclaredFields();
+        for (Field field: varNames){
+            if (!field.getName().equals("count"))
+                header.add(field.getName());
+        }
+
+        return header;
+    }
+
+    public List<String> CSVValues(){
+        List<String> values = new ArrayList<>();
+        values.add(String.valueOf(this.id));
+        values.add(String.valueOf(this.price));
+        values.add(title);
+        values.add(this.description);
+
+        return values;
     }
 }

@@ -1,34 +1,41 @@
+import dataPersistance.CSVWriter;
+import game.DigitalGame;
+import game.PhysicalGame;
+import hardware.Cpu;
+import hardware.GameConsole;
+import hardware.VideoCard;
+import userInteraction.User;
+import dataPersistance.CSVWriter;
+import dataPersistance.CSVReader;
+
+import java.io.IOException;
+import java.util.*;
+
 public class Test {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, IllegalAccessException {
         // Defining the games that will be selling
-        var Witcher3Steam = new DigitalGame(10, "The Witcher 3: Wild Hunt",
+        var witcher3Steam = new DigitalGame(10, "The Witcher 3: Wild Hunt",
               "As war rages on throughout the Northern Realms, you take on the greatest contract of your life — tracking down the Child of Prophecy, a living weapon that can alter the shape of the world.",
               "CD PROJEKT RED", "Single-Player", 10, "PC", 100, "Steam");
-        Witcher3Steam.addGenere("Open World RPG");
-        Witcher3Steam.addTag("Story Righ");
-        Witcher3Steam.addTag("Atmospheric");
+        witcher3Steam.addGenere("Open World RPG");
 
-        var Witcher3PS4 = new PhysicalGame(30, "The Witcher 3: Wild Hunt",
+        var witcher3PS4 = new PhysicalGame(30, "The Witcher 3: Wild Hunt",
                 "As war rages on throughout the Northern Realms, you take on the greatest contract of your life — tracking down the Child of Prophecy, a living weapon that can alter the shape of the world.",
                 "CD PROJEKT RED", "Single-Player", 10, "PS4", 60, 3);
-        Witcher3PS4.addGenere("Open World RPG");
-        Witcher3PS4.addTag("Story Righ");
-        Witcher3PS4.addTag("Atmospheric");
+        witcher3PS4.addGenere("Open World RPG");
 
-        var Portal2 = new DigitalGame(8, "Portal 2",
+        var portal2 = new DigitalGame(8, "Portal 2",
               "The Perpetual Testing Initiative has been expanded to allow you to design co-op puzzles for you and your friends!",
               "Valve", "Single-Player / Co-op", 10, "PC", 20, "Steam");
-        Portal2.addGenere("3D Platformer");
-        Portal2.addGenere("Puzzle");
-        Portal2.addTag("Steam Workshop");
-        Portal2.addTag("Split Screen Co-op");
+        portal2.addGenere("3D Platformer");
+        portal2.addGenere("Puzzle");
 
-        // Defining the Hardware that will be selling
+        // Defining the hardware.Hardware that will be selling
         // Defining game consoles
-        var PS4 = new GameConsole(400, "Playstation 4 Slim",
+        var ps4 = new GameConsole(400, "Playstation 4 Slim",
                 "Introducing the Playstation4 SLIM, 1TB hard drive, all greatest games, TV, music and more.",
                 100, 0.5f, 2, "1080p");
-        PS4.addFreeGame(Witcher3PS4);
+        ps4.addFreeGame(witcher3PS4);
 
         // Defining CPU's
         var i79700F = new Cpu(300, "i7 9700F", "9th generation 14 nm processor", 65,0.2f, 8,4.7f, 1151);
@@ -41,11 +48,26 @@ public class Test {
 
         User uMihai = new User("Mihai");
 
-        uMihai.addItemToCart(PS4);
+        uMihai.addItemToCart(ps4);
         uMihai.addItemToCart(rtx2070Super);
-        uMihai.addItemToCart(Portal2);
+        uMihai.addItemToCart(portal2);
 
         System.out.println(uMihai.buy());
+
+
+        CSVWriter writer = CSVWriter.getInstance("test.csv");
+        CSVReader reader = CSVReader.getInstance("test.csv");
+        //writer.writeHeader(new ArrayList<String>(Arrays.asList("Hello", "World!", "How", "Are", "You")));
+        //System.out.println(uMihai.CSVHeader());
+        //System.out.println(uMihai.CSVValues());
+        writer.write(uMihai.CSVHeader());
+        writer.write(uMihai.CSVValues());
+
+        //System.out.println(reader.readLine());
+        //System.out.println(reader.readLine());
+        System.out.println(reader.readLine());
+
+
 
     }
 }

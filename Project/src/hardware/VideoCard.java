@@ -1,3 +1,11 @@
+package hardware;
+
+import hardware.Hardware;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+
 public class VideoCard extends Hardware {
     private float frequency;
     private int vram;
@@ -46,11 +54,38 @@ public class VideoCard extends Hardware {
 
     @Override
     public String toString() {
-        return super.toString() +"\nVideoCard{" +
+        return super.toString() +"\nhardware.VideoCard{" +
                 "frequency=" + frequency +
                 ", vram=" + vram +
                 ", numberOfVents=" + numberOfVents +
                 ", outputResolution='" + outputResolution + '\'' +
                 '}';
     }
+
+    public List<String> CSVHeader(){
+        var superHeader = super.CSVHeader();
+        List<String> header = new ArrayList<>();
+
+        header.addAll(superHeader);
+
+        var varNames = VideoCard.class.getDeclaredFields();
+        for (Field field: varNames){
+            header.add(field.getName());
+        }
+
+        return header;
+    }
+
+    public List<String> CSVValues(){
+        var superList = super.CSVValues();
+        List<String> values = new ArrayList<>();
+
+        values.addAll(superList);
+        values.add(String.valueOf(this.frequency));
+        values.add(String.valueOf(this.vram));
+        values.add(String.valueOf(this.numberOfVents));
+        values.add(this.outputResolution);
+        return values;
+    }
+
 }

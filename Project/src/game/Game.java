@@ -1,3 +1,6 @@
+package game;
+import products.Product;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -71,7 +74,7 @@ public abstract class Game extends Product {
 
     @Override
     public String toString() {
-        return super.toString() +"\nGame{" +
+        return super.toString() +"\ngame.Game{" +
                 "genres=" + genres +
                 ", developer='" + developer + '\'' +
                 ", type='" + type + '\'' +
