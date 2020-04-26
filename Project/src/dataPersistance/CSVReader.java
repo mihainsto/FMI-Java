@@ -36,6 +36,8 @@ public class CSVReader {
             values.addAll(Arrays.asList(l));
             break;
         }
+        Audit a = Audit.getInstance();
+        a.log("Read from csv");
         return values;
     }
 }

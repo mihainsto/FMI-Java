@@ -50,6 +50,8 @@ public class CSVWriter {
         });
         writer.append("\n");
         writer.flush();
+        Audit a = Audit.getInstance();
+        a.log("Write to csv");
     }
 
 
