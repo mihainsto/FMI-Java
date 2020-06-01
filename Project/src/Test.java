@@ -1,5 +1,4 @@
-import dataPersistance.Audit;
-import dataPersistance.CSVWriter;
+import dataPersistance.*;
 import game.DigitalGame;
 import game.Game;
 import game.PhysicalGame;
@@ -8,8 +7,7 @@ import hardware.GameConsole;
 import hardware.VideoCard;
 import userInteraction.User;
 import dataPersistance.CSVWriter;
-import dataPersistance.CSVReader;
-
+import dataPersistance.SqliteDB;
 import java.io.IOException;
 import java.util.*;
 
@@ -101,6 +99,7 @@ public class Test {
         d = reader.readLine();
         GameConsole perPs4 =new GameConsole(Float.parseFloat(d.get(1)), d.get(2), d.get(3), Integer.parseInt(d.get(4)), Float.parseFloat(d.get(5)), Integer.parseInt(d.get(6)), d.get(7));
         System.out.println(perPs4.toString());
+
 
 //        Audit a = Audit.getInstance();
 //        a.log("TEST");
