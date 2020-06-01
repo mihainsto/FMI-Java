@@ -22,6 +22,13 @@ public abstract class Product {
         this.id = count.incrementAndGet();
     }
 
+    public Product(float price, String title, String description, int id) {
+        this.price = price;
+        this.title = title;
+        this.description = description;
+        this.id = id;
+    }
+
     public float getPrice() {
         return price;
     }
