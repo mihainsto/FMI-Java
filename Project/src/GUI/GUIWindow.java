@@ -52,10 +52,36 @@ public class GUIWindow {
 
         var userTitleLabel=new JLabel("User ");
         userTitleLabel.setBounds(150,50, 100,30);
-
-
         f.add(userTitleLabel);
-        f.setSize(400, 500);//400 width and 500 height
+
+        var usernameLabel=new JLabel("Enter username: ");
+        usernameLabel.setBounds(25,100, 200,30);
+        f.add(usernameLabel);
+
+        var usernameield=new JTextField("");
+        usernameield.setBounds(200,100, 200,30);
+        f.add(usernameield);
+
+        JButton buyBTN = new JButton("Buy");
+        buyBTN.setBounds(25, 650, 200, 40);
+
+        buyBTN.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                System.out.println("Add buy btn clicked");
+            }
+        });
+        f.add(buyBTN);
+
+        var comboLabel =new JLabel("Select: ");
+        comboLabel.setBounds(25,150, 200,30);
+        f.add(comboLabel);
+
+        String country[]={"India","Aus","U.S.A","England","Newzealand"};
+        var  selectCoboBox =new JComboBox(country);
+        selectCoboBox.setBounds(200, 150,90,20);
+        f.add(selectCoboBox);
+
+        f.setSize(800, 750);//400 width and 500 height
         f.setLayout(null);//using no layout managers
         f.setVisible(true);//making the frame visible
 
@@ -261,13 +287,57 @@ public class GUIWindow {
         });
 
         f.add(addCPUBTN);
-//        var addHardwareLabel= new JLabel("Add hardware ");
-//        addHardwareLabel.setBounds(25,150, 200,30);
-//        f.add(addHardwareLabel);
 
 
 
-        f.setSize(1000, 800);//400 width and 500 height
+        var addUserLabel = new JLabel("Add User");
+        addUserLabel.setBounds(1000,100, 200,30);
+        f.add(addUserLabel);
+
+        var userUsernameLabel = new JLabel("Username");
+        userUsernameLabel.setBounds(1000,150, 200,30);
+        f.add(userUsernameLabel);
+
+        var userUsernameField = new JTextField(" ");
+        userUsernameField.setBounds(1125,150, 200,30);
+        f.add(userUsernameField);
+
+
+        JButton addUserBTN = new JButton("Add User");
+        addUserBTN.setBounds(1125, 650, 200, 40);
+        addUserBTN.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                System.out.println("Add User btn clicked");
+            }
+        });
+
+        f.add(addUserBTN);
+
+
+        var removeDBLabel = new JLabel("Remove from DB");
+        removeDBLabel.setBounds(1425,100, 200,30);
+        f.add(removeDBLabel);
+
+        var selectWhatToRemoveLabel = new JLabel("Select: ");
+        selectWhatToRemoveLabel.setBounds(1425,150, 200,30);
+        f.add(selectWhatToRemoveLabel);
+
+        String country[]={"India","Aus","U.S.A","England","Newzealand"};
+        var  removeComboBox =new JComboBox(country);
+        removeComboBox.setBounds(1550, 150,90,20);
+        f.add(removeComboBox);
+
+        JButton removeDBBTN = new JButton("Remove");
+        removeDBBTN.setBounds(1425, 650, 200, 40);
+        removeDBBTN.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                System.out.println("Add Remove DB btn clicked");
+            }
+        });
+
+        f.add(removeDBBTN);
+
+        f.setSize(1920, 800);//400 width and 500 height
         f.setLayout(null);//using no layout managers
         f.setVisible(true);//making the frame visible
     }
