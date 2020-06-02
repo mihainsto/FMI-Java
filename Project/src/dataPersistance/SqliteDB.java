@@ -297,8 +297,10 @@ public class SqliteDB {
     public void deleteCpu(int id){
         try {
             this.stmt = c.createStatement();
-            var querry = "DELETE FROM CPU WHERE id = " + id;
-            stmt.executeUpdate(querry);
+            var querry1 = "DELETE FROM PRODUCTS WHERE id = " + id;
+            var querry2 = "DELETE FROM CPU WHERE id = " + id;
+            stmt.executeUpdate(querry1);
+            stmt.executeUpdate(querry2);
 
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
@@ -308,8 +310,12 @@ public class SqliteDB {
     public void deleteDigitalGame(int id){
         try {
             this.stmt = c.createStatement();
-            var querry = "DELETE FROM DigitalGame WHERE id = " + id;
-            stmt.executeUpdate(querry);
+            var querry1 = "DELETE FROM PRODUCTS WHERE id = " + id;
+            var querry3 = "DELETE FROM Game WHERE id = " + id;
+            var querry2 = "DELETE FROM DigitalGame WHERE id = " + id;
+            stmt.executeUpdate(querry1);
+            stmt.executeUpdate(querry2);
+            stmt.executeUpdate(querry3);
 
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
@@ -319,8 +325,12 @@ public class SqliteDB {
     public void deletePhysicalGame(int id){
         try {
             this.stmt = c.createStatement();
-            var querry = "DELETE FROM PhysicalGame WHERE id = " + id;
-            stmt.executeUpdate(querry);
+            var querry1 = "DELETE FROM PRODUCTS WHERE id = " + id;
+            var querry2 = "DELETE FROM PhysicalGame WHERE id = " + id;
+            var querry3 = "DELETE FROM Game WHERE id = " + id;
+            stmt.executeUpdate(querry1);
+            stmt.executeUpdate(querry2);
+            stmt.executeUpdate(querry3);
 
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
