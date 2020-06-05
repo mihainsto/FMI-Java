@@ -36,12 +36,14 @@ public class GUIWindow {
         products.addAll(cpus);
         return products;
     }
+
     public void testGet(){
         var products = getProducts();
         for (Product product : products) {
             System.out.println(product);
         }
     }
+
     public void runGui(){
         JFrame startWindow = new JFrame();
 
@@ -67,7 +69,10 @@ public class GUIWindow {
             public void actionPerformed(ActionEvent e){
                 startWindow.dispose();
                 JFrame userWindow = new JFrame();
-                userWindowSetup(userWindow);
+                var users = db.readUsers();
+                userWindowSetup(userWindow, users, "", getProducts());
+
+
             }
         });
         startWindow.add(userbtn);
@@ -77,7 +82,7 @@ public class GUIWindow {
         startWindow.setLayout(null);//using no layout managers
         startWindow.setVisible(true);//making the frame visible
     }
-    public  void userWindowSetup(JFrame f){
+    public  void userWindowSetup(JFrame f, List<User> users, String curentUser, List<Product> products){
 
 
         var userTitleLabel=new JLabel("User ");
@@ -88,16 +93,15 @@ public class GUIWindow {
         usernameLabel.setBounds(25,100, 200,30);
         f.add(usernameLabel);
 
-        var usernameield=new JTextField("");
-        usernameield.setBounds(200,100, 200,30);
-        f.add(usernameield);
-
+        var usernamefield=new JTextField("");
+        usernamefield.setBounds(200,100, 200,30);
+        f.add(usernamefield);
+        usernamefield.setText(curentUser);
 
 
         var comboLabel =new JLabel("Select: ");
         comboLabel.setBounds(25,150, 200,30);
         f.add(comboLabel);
-        var products = this.getProducts();
 
         List<String> options = new ArrayList<>();
         String[] optionsAr = new String[options.size()];
@@ -117,20 +121,71 @@ public class GUIWindow {
             lastY += 70;
         }
 
+        JButton cartBTN = new JButton("Add to Shopping Cart");
+        cartBTN.setBounds(25, 650, 200, 40);
+
+        cartBTN.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                var id = Integer.parseInt(selectCoboBox.getSelectedItem().toString());
+                var product = products.get(id-1);
+                var username = usernamefield.getText();
+                System.out.println(id);
+                System.out.println("Add to cart btn clicked");
+                System.out.println("username " + username);
+                for (User user : users) {
+                    if (user.getUsername().equalsIgnoreCase(username)){
+                        user.addItemToCart(product);
+                        System.out.println(user);
+                        f.dispose();
+                        JFrame newWindow = new JFrame();
+                        userWindowSetup(newWindow, users, username, products);
+                        break;
+                    }
+                }
+
+            }
+        });
+        f.add(cartBTN);
+
+
+        var cartLabel=new JLabel("Shopping cart:");
+        cartLabel.setBounds(600,100, 200,30);
+        f.add(cartLabel);
+        var username = usernamefield.getText();
+        lastY = 0;
+        for (User user : users) {
+            if (user.getUsername().equalsIgnoreCase(username)){
+                var cart = user.getCartList();
+                var cartList = cart.getProducts();
+                for (Product product : cartList) {
+                    var lb = new JLabel();
+                    lb.setFont(new Font("Serif", Font.BOLD, 10));
+                    lb.setText("<html>" + product.getId() + " " + product.getTitle() + " " + product.getPrice() +  "</html>");
+                    lb.setBounds(600, lastY, 500, 500);
+                    f.add(lb);
+                    lastY += 20;
+
+                }
+                break;
+            }
+        }
+
         JButton buyBTN = new JButton("Buy");
-        buyBTN.setBounds(25, 650, 200, 40);
+        buyBTN.setBounds(600, 650, 200, 40);
 
         buyBTN.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 var id = Integer.parseInt(selectCoboBox.getSelectedItem().toString());
                 var product = products.get(id-1);
                 System.out.println(id);
-                System.out.println("Add buy btn clicked");
+                System.out.println("Add to cart btn clicked");
             }
         });
-        f.add(buyBTN);
 
-        f.setSize(800, 750);//400 width and 500 height
+
+
+        f.add(buyBTN);
+        f.setSize(1000, 750);//400 width and 500 height
         f.setLayout(null);//using no layout managers
         f.setVisible(true);//making the frame visible
 

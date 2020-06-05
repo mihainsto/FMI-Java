@@ -23,14 +23,13 @@ public class User {
     public String getUsername() {
         return username;
     }
-
     public void addItemToCart(Product product){
         this.cart.addProduct(product);
     }
     public float buy(){
         return this.cart.buy();
     }
-
+    public ShoppingCart getCartList(){return this.cart;}
 
     public List<String> CSVHeader(){
         List<String> header = new ArrayList<>();
