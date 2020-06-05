@@ -32,7 +32,8 @@ public class Audit {
     }
 
     public void log(String what) throws IOException{
-        String stringLog = (LocalDateTime.now().toString()) + "," + what;
+        Thread currentThread = Thread.currentThread();
+        String stringLog = (LocalDateTime.now().toString()) + "," + currentThread.getName()+ "," + what;
         writer.append(stringLog);
         writer.append("\n");
         writer.flush();

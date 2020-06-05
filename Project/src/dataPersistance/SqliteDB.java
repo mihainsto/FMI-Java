@@ -17,10 +17,14 @@ import java.util.List;
 public class SqliteDB {
     Connection c = null;
     Statement stmt = null;
-
+    Audit a = null;
     public SqliteDB() {
         // try connect to DB
-
+        try {
+            a = Audit.getInstance();
+        } catch (Exception e){
+            System.out.printf("Error: " + e.getMessage());
+        }
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:gameManagement.sqlite");
@@ -43,6 +47,8 @@ public class SqliteDB {
                 var user = new User(username);
                 users.add(user);
             }
+
+            a.log("Read users from db");
         } catch (Exception e) {
             System.out.printf("Error: " + e.getMessage());
         }
@@ -55,6 +61,7 @@ public class SqliteDB {
             this.stmt = c.createStatement();
             var querry = "INSERT INTO USER (username) VALUES  (\"" + u.getUsername() + "\")";
             stmt.executeUpdate(querry);
+            a.log("Create user in db");
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -66,6 +73,9 @@ public class SqliteDB {
             this.stmt = c.createStatement();
             var querry = "UPDATE USER SET username = \"" + username + "\" WHERE id = " + id;
             stmt.executeUpdate(querry);
+            a.log("Update user in db");
+
+
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -95,6 +105,8 @@ public class SqliteDB {
                 cpus.add(cpu);
             }
             //c.close();
+            a.log("Read cpu from db");
+
         } catch (Exception e) {
             System.out.printf("Error: " + e.getMessage());
         }
@@ -115,6 +127,7 @@ public class SqliteDB {
                     cpu.getFrequency() + "\",\"" + cpu.getSocket() + "\")";
             stmt.executeUpdate(querry1);
             stmt.executeUpdate(querry2);
+            a.log("Create cpu in db");
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -131,6 +144,7 @@ public class SqliteDB {
                     ", socket = \""+socket+"\" WHERE id = " + id;
             stmt.executeUpdate(querry1);
             stmt.executeUpdate(querry2);
+            a.log("Update cpu in db");
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -158,6 +172,7 @@ public class SqliteDB {
                         developer, type, reviewsNote, platform, size, digitalPlatform);
                 digitalGames.add(dg);
             }
+            a.log("Read digital game frim db");
         } catch (Exception e) {
             System.out.printf("Error: " + e.getMessage());
         }
@@ -184,6 +199,7 @@ public class SqliteDB {
             stmt.executeUpdate(querry1);
             stmt.executeUpdate(querry2);
             stmt.executeUpdate(querry3);
+            a.log("Create digital game in db");
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -203,6 +219,7 @@ public class SqliteDB {
             stmt.executeUpdate(querry1);
             stmt.executeUpdate(querry2);
             stmt.executeUpdate(querry3);
+            a.log("Update digital game in db");
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -229,6 +246,7 @@ public class SqliteDB {
                 var pg = new PhysicalGame(price, title, description,
                         developer, type, reviewsNote, platform, size, numberDisks);
                 physicalGames.add(pg);
+                a.log("Read physical game from db");
             }
         } catch (Exception e) {
             System.out.printf("Error: " + e.getMessage());
@@ -256,6 +274,7 @@ public class SqliteDB {
             stmt.executeUpdate(querry1);
             stmt.executeUpdate(querry2);
             stmt.executeUpdate(querry3);
+            a.log("Create physical game in db");
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -275,6 +294,7 @@ public class SqliteDB {
             stmt.executeUpdate(querry1);
             stmt.executeUpdate(querry2);
             stmt.executeUpdate(querry3);
+            a.log("Update physical game in db");
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -288,7 +308,7 @@ public class SqliteDB {
             this.stmt = c.createStatement();
             var querry = "DELETE FROM USER WHERE id = " + id;
             stmt.executeUpdate(querry);
-
+            a.log("delete user db");
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -301,7 +321,7 @@ public class SqliteDB {
             var querry2 = "DELETE FROM CPU WHERE id = " + id;
             stmt.executeUpdate(querry1);
             stmt.executeUpdate(querry2);
-
+            a.log("delete cpu db");
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -316,6 +336,7 @@ public class SqliteDB {
             stmt.executeUpdate(querry1);
             stmt.executeUpdate(querry2);
             stmt.executeUpdate(querry3);
+            a.log("delete digitalGame db");
 
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
@@ -331,6 +352,7 @@ public class SqliteDB {
             stmt.executeUpdate(querry1);
             stmt.executeUpdate(querry2);
             stmt.executeUpdate(querry3);
+            a.log("delete physicalGame db");
 
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());

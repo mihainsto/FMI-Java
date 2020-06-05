@@ -28,3 +28,14 @@
 2020-06-01T21:55:28.443242,Read from csv
 2020-06-01T21:55:28.446531,Read from csv
 2020-06-01T21:55:28.446592,Read from csv
+2020-06-05T11:03:08.203212,AWT-EventQueue-0,Read users from db
+2020-06-05T11:11:06.380238,main,Sdtarted execution of GUITest
+2020-06-05T11:11:06.486550,main,Starting GUI
+2020-06-05T11:11:07.608819,AWT-EventQueue-0,Read users from db
+2020-06-05T11:11:07.609345,AWT-EventQueue-0,get products from db
+2020-06-05T11:11:07.615329,AWT-EventQueue-0,Read physical game from db
+2020-06-05T11:11:07.616030,AWT-EventQueue-0,Read physical game from db
+2020-06-05T11:11:07.618332,AWT-EventQueue-0,Read digital game frim db
+2020-06-05T11:11:07.621935,AWT-EventQueue-0,Read cpu from db
+2020-06-05T11:11:07.622203,AWT-EventQueue-0,Loading user window
+2020-06-05T11:11:10.972543,AWT-EventQueue-0,Loading user window

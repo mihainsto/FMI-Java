@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,11 +13,19 @@ import game.PhysicalGame;
 import hardware.Cpu;
 import products.Product;
 import userInteraction.User;
+import dataPersistance.Audit;
+
 
 public class GUIWindow {
     SqliteDB db;
+    Audit a;
     public GUIWindow(){
         db = new SqliteDB();
+        try {
+            a = Audit.getInstance();
+        } catch(Exception e){
+            System.out.println(e);
+        }
     }
 
     public static void main(String[] args) {
@@ -26,6 +35,12 @@ public class GUIWindow {
 //        System.out.println(dg);
     }
     public List<Product> getProducts(){
+        try {
+            a.log("get products from db");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         List<Product> products = new ArrayList<>();
         var physicalGames = db.readPsyhicalGames();
         var digitalGames = db.readDigitalGames();
@@ -45,6 +60,11 @@ public class GUIWindow {
     }
 
     public void runGui(){
+        try {
+            a.log("Starting GUI");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         JFrame startWindow = new JFrame();
 
         var l1=new JLabel("Game Shop");
@@ -84,6 +104,11 @@ public class GUIWindow {
     }
     public  void userWindowSetup(JFrame f, List<User> users, String curentUser, List<Product> products){
 
+        try {
+            a.log("Loading user window");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         var userTitleLabel=new JLabel("User ");
         userTitleLabel.setBounds(150,50, 100,30);
@@ -193,6 +218,11 @@ public class GUIWindow {
 
     public  void adminWindowSetup(JFrame f){
 
+        try {
+            a.log("Loading admin window");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         var userTitleLabel=new JLabel("Admin ");
         userTitleLabel.setBounds(150,50, 100,30);
         f.add(userTitleLabel);
